@@ -1,0 +1,17 @@
+{
+  "short_name": "SwiftHaul",
+  "name": "SwiftHaul Business Portal",
+  "description": "Last-mile logistics coordinating app for Tier-2/3 Indian businesses.",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512 font"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0C1B33",
+  "theme_color": "#0C1B33",
+  "display": "standalone",
+  "orientation": "portrait"
+}

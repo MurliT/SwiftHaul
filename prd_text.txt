@@ -1,0 +1,241 @@
+SwiftHaul
+Product Requirements Document
+Last-mile delivery coordination for Tier-2 & Tier-3 India  |  Seed Stage  |  MVP v1.0
+What we're building
+A B2B SaaS platform that lets small business owners — kirana stores, pharmacies, home bakers, local e-commerce sellers — book, track, and pay for same-day deliveries through a single dashboard, instead of calling 5 different drivers and managing WhatsApp groups manually.
+Target MRR
+₹25L
+Month 9
+Order success
+94%+
+vs 74% industry
+Business retention
+80%
+90-day cohort
+Booking speed
+<90s
+login to confirm
+1. Goals & Success Metrics
+Every goal is specific, time-bound, and tied directly to business survival. No vanity metrics.
+Business goals
+Metric
+Target
+Context
+Monthly Recurring Revenue
+₹25L
+By month 9 post-launch
+Order success rate
+94%+
+Up from ~74% industry average
+Business retention (90-day)
+80%
+Cohort retention at day 90
+Booking time
+<90 seconds
+Login to confirmed pickup
+Net Promoter Score
+45+
+Up from 20 at pilot launch
+Operational metrics
+Metric
+Target
+Context
+Driver assignment speed
+<4 minutes
+90% of 9am–8pm bookings
+WISMO call reduction
+−60%
+After WhatsApp tracking goes live
+Support ticket reduction
+−40%
+Within 60 days of launch
+Time to first booking
+<7 minutes
+From completed onboarding
+Driver supply ratio
+3:1
+Drivers per business, per zone
+2. Constraints & Realities
+Budget
+Total seed round: ₹1.2 Crore
+MVP budget ceiling: ₹30L (to preserve 18-month runway)
+Team size at launch: 4 engineers, 1 designer, 2 ops
+Timeline
+MVP completion: 14 weeks from kickoff
+Pilot scope: 50 businesses in Bilaspur and Raipur
+City expansion: Month 4 onwards, pending pilot metrics
+Compliance
+GST invoicing built in from day one — auto-generated PDFs with GSTIN and HSN codes on delivery confirmation
+Driver background checks per Motor Vehicles Act norms — mandatory before any driver is activated
+Data residency: AWS Mumbai region for compliance with Indian data localisation norms
+Technical constraints
+Device target
+₹8,000 Android phones — all UI and performance decisions run through this constraint
+Connectivity
+4G with low data literacy. Offline capability required for core booking flows
+SMS fallback
+Real-time tracking must degrade gracefully to SMS updates when WhatsApp is unavailable
+Language
+Hindi-first interface with English labels for business-facing screens
+Payments
+UPI and Cash on delivery only in v1 — no card payment rails required
+3. Scope
+In scope — v1
+Out of scope — v1
+Instant booking dashboard
+Inter-city freight
+Real-time driver tracking
+Warehousing
+SMS fallback for tracking
+iOS native app
+Automated GST invoicing
+Fleet ownership
+Driver onboarding & ratings
+International logistics
+WhatsApp order notifications
+AI route optimisation
+Cash + UPI payments
+Card payment rails
+Driver background check flow
+Dynamic surge pricing
+Monthly invoice summary
+B2C consumer app
+Android-optimised PWA
+Third-party API integrations
+4. User Personas
+Target users have 4G connectivity but low data literacy. Every design decision must be validated on a ₹8,000 Android device.
+Ravi Kumar — Pharmacy owner, Bilaspur
+User story
+"As a pharmacy owner getting 30 daily WhatsApp medicine orders, I need to assign a driver and share live tracking with my customer in under 2 minutes, so I stop losing repeat customers to Tata 1mg's delivery promise."
+Pain: Loses customers to branded delivery services that offer real-time tracking.
+Device: ₹10K Android, 4G, uses WhatsApp Business daily.
+Priya Sharma — Home baker & Instagram seller, Raipur
+User story
+"As a home-baker fulfilling 15 cake orders every weekend, I need a single view of all pending pickups with automated WhatsApp updates, so I'm not glued to my phone managing 15 conversations while decorating."
+Pain: Manually manages 15 parallel WhatsApp conversations during peak weekends.
+Device: ₹8K Android, 4G, Instagram + WhatsApp native user.
+Mohammed Arif — Electronics reseller
+User story
+"I need to confirm same-day delivery to customers at checkout or they'll just buy from Flipkart. Right now I don't know if I can deliver until I call 3 drivers."
+Pain: Cannot commit to delivery windows at point of sale — loses conversion.
+Device: ₹12K Android, 4G, runs a small WordPress store.
+5. Feature Detail
+For every feature: why it exists, how it works, and what success looks like.
+Feature
+Why it exists
+How it works
+Success metric
+Instant driver matching
+Businesses lose orders when driver search takes 20+ minutes on WhatsApp.
+Geo-radius matching pings the 3 nearest available drivers simultaneously. Radius expands 1km every 90s if no response.
+Driver assigned within 4 minutes for 90% of bookings between 9am–8pm.
+WhatsApp tracking link
+End-customers don't have the app. WhatsApp penetration is near 100% in this segment.
+Auto-sends a no-install tracking link via WhatsApp Business API once driver is en route. Updates every 5 minutes.
+WISMO calls to the business drop by 60% within the first 30 days.
+Automated GST invoicing
+Most SMEs generate invoices manually — 15 minutes per order, unscalable.
+On delivery confirmation, platform auto-generates a PDF with GSTIN and HSN code. Monthly filing summary included.
+Reduces a sales objection present in 40% of leads. Cited in NPS positive responses.
+Bulk booking dashboard
+Weekend sellers like home bakers need to schedule 10–20 pickups in a single session.
+CSV/list import for addresses. Single confirmation screen. One-click assignment to available drivers.
+Reduces booking time for multi-order sellers by 70% vs manual WhatsApp flow.
+Driver ratings & history
+SMEs need reliable driver relationships. Bad drivers hurt customer retention.
+Post-delivery 1–5 star rating visible during assignment. Drivers below 3.5 average suspended after 10 orders.
+Average order success rate reaches 94%+ vs 74% industry baseline.
+Offline booking mode
+4G connectivity in Tier-2 cities is intermittent. A dropped booking loses a customer.
+Core booking form works offline, stores in local storage, and syncs on reconnection. SMS confirmation always sent.
+Zero failed bookings due to connectivity. Reduces support tickets by 25%.
+Delivery cost estimator
+SMEs need cost visibility before committing at checkout with their customer.
+Address-based distance calculation shows estimated cost before booking. Zone-based pricing table always visible.
+Reduces booking abandonment by 35%; increases checkout conversion for e-commerce sellers.
+Smart notifications
+Business owners are busy and can't watch a dashboard all day.
+WhatsApp + SMS at key milestones: pickup confirmed, driver arrived, en route, delivered, invoice ready.
+Dashboard check-ins reduce by 50%. NPS impact estimated +8 points.
+6. Technology Stack
+Frontend
+React PWA — installable on Android homescreen, offline-first with service workers
+Tailwind CSS — utility-first, small bundle critical for ₹8K devices
+React Query — smart caching reduces data usage on limited connections
+Backend
+Node.js + Express — lightweight API layer; easy to hire for in Tier-2 cities
+PostgreSQL — transactional data (orders, payments, invoices) with ACID guarantees
+Redis — driver geo-location cache and real-time queue for driver matching
+Infrastructure
+AWS (Mumbai region) — low latency for Chhattisgarh; compliant data residency
+CloudFront CDN — fast asset delivery on slow connections
+AWS RDS + ElastiCache — managed DB, no DBA headcount needed at seed stage
+Integrations
+WhatsApp Business API — order notifications + tracking links (100% user penetration in segment)
+Razorpay — UPI + Cash on delivery; handles GST invoice PDFs via API
+Google Maps Platform — geocoding, distance matrix for cost estimation and driver routing
+MSG91 / Twilio — SMS fallback for tracking when WhatsApp is undeliverable
+7. 14-Week Roadmap to Pilot
+Phase
+Weeks
+Deliverables
+Phase 1
+Weeks 1–4
+Foundation: Auth + onboarding, driver registration, booking form v1, DB schema, GST invoice PDF generation, SMS integration
+Phase 2
+Weeks 5–8
+Core delivery loop: Geo-matching engine, real-time tracking, WhatsApp Business API, driver mobile app, UPI + COD payments, offline PWA mode
+Phase 3
+Weeks 9–11
+Business features: Bulk booking, ratings system, dashboard analytics, cost estimator, Hindi UI, push notifications
+Phase 4
+Weeks 12–14
+Pilot launch: 50 business onboarding, driver supply build-up in Bilaspur and Raipur, support tooling, monitoring + alerts, NPS survey setup
+Post-pilot expansion (Month 4–9)
+City expansion to Bhilai, Korba, Jagdalpur. Feature additions: AI route optimisation, API for third-party integrations, iOS PWA optimisation, dynamic pricing experiments.
+8. Risks & Mitigations
+Risk
+Impact
+Probability
+Mitigation
+Driver supply shortage at launch
+High
+Medium
+Pre-recruit 150 drivers before go-live. Offer Rs 500 activation bonus. Partner with existing logistics co-ops.
+WhatsApp Business API approval delay
+Medium
+High
+Submit API application in week 1. Build SMS fallback as full functional replacement, not degraded mode.
+Low business conversion from pilot
+High
+Medium
+Require credit card on file even during free trial. Run 3-day onboarding calls. Identify 5 champion businesses early.
+Connectivity causing failed bookings
+Medium
+High
+Offline-first architecture from day 1. Aggressive testing on Rs 8K Android devices. SMS confirmation always sent.
+Funded competitor enters Tier-2 early
+High
+Low
+Speed of execution and local driver relationships are the moat. Hit 500 active businesses before any competitor has local supply.
+GST compliance complexity slows sales
+Medium
+Medium
+Partner with CA firm for compliance review in month 1. GST invoicing is core pitch — removes objection in 40% of leads.
+9. Market Opportunity & Why Now
+The 18-month window
+Post-COVID, Tier-2 city e-commerce grew 3x faster than metros. Last-mile infrastructure has not followed. SwiftHaul has an 18-month window before a well-funded competitor moves in. The lean seed-funded model, SME-first UX, and local driver network are the compounding moats.
+Tier-2 e-commerce growth: 3x faster than metros post-2020
+Last-mile infrastructure gap: industry order success rate sits at ~74%
+SME addressable market: 63 million registered SMEs in India; 8M+ in Tier-2/3 cities
+WhatsApp penetration: near 100% in target segment — zero install friction for tracking
+Competitive window: 18 months before a funded national player enters Bilaspur and Raipur
+Document status & ownership
+Version
+Status
+Owner
+Last updated
+v1.0
+Draft — for pilot team review
+Product Lead
+June 2026
